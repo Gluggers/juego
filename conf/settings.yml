@@ -1,0 +1,6 @@
+game_title:
+  en: "Adventure Game"
+  es: "Juego de Aventura"
+lang: es
+version: "0.2"
+default_save_file_name: "savegame.json"

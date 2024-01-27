@@ -1,0 +1,16 @@
+# Coins
+- id: 0095bc48-4fc1-4b4f-b927-3ca54cdc3deb
+  name:
+    en: 'Gold Coins'
+    es: 'Monedas de Oro'
+  value_low: 0
+  value_high: 0
+  description:
+    en: 'Shiny gold coins!'
+    es: '¡Brillantes monedas de oro!'
+  usage:
+    en: 'I can use this to buy items.'
+    es: 'Sirven para comprar cosas.'
+  properties: 0x1
+  image_file: 'coins_50x50.png'
+  enlarged_image_file: 'coins_100x100.png'

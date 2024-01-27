@@ -1,0 +1,24 @@
+# Hammer
+- id: d9b845ce-a519-4461-9d73-f458d6e79b8e
+  name:
+    en: 'Hammer'
+    es: 'Martillo'
+  value_low: 0
+  value_high: 0
+  description:
+    en: 'A regular hammer'
+    es: 'Un martillo común y corriente.'
+  usage:
+    en: 'I can use this to build items.'
+    es: 'Sirven para construir cosas.'
+  properties: 0x80
+  image_file: 'hammer_50x50.png'
+  enlarged_image_file: 'hammer_100x100.png'
+
+# Knife
+
+
+# Tinderbox
+
+
+# Needle
