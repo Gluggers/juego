@@ -55,11 +55,11 @@ PYGAME_KEY_STR_MAPPING = {
 }
 
 
-def strip_yaml(path):
+def strip_yaml(path: str) -> list:
     if path:
         with open(path, encoding='utf-8') as yml:
             return list(yaml.safe_load_all(yml))
-    return None
+    return []
 
 
 def get_base_path():
@@ -90,7 +90,7 @@ def get_music_path():
     return os.path.join(get_sound_path(), 'music')
 
 
-def get_pygame_key_str(key_id, shift_on=False):
+def get_pygame_key_str(key_id, shift_on=False) -> str:
     """Returns the character string for the given key ID.
 
     Args:
@@ -103,7 +103,7 @@ def get_pygame_key_str(key_id, shift_on=False):
         String representation of the pressed key, depending on
         whether the shift button was pressed, as well.
     """
-    ret_val = None
+    ret_val = ''
     key_info = PYGAME_KEY_STR_MAPPING.get(key_id, None)
     if key_info:
         if shift_on:
@@ -120,7 +120,7 @@ def parse_abbreviated_quantity(quantity_str):
     return None
 
 
-def get_abbreviated_quantity(quantity):
+def get_abbreviated_quantity(quantity) -> str:
     """ Returns abbreviated string for the quantity.
 
     Abbreviates the given quantity and returns the string

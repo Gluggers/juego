@@ -17,10 +17,7 @@ class Inventory(item_listing.ItemListing):
         # of greater than 1.
         # Quantity should not be less than 1, otherwise item will be
         # removed from the data structure.
-        item_listing.ItemListing.__init__(
-            self,
-            max_size=max_size,
-        )
+        item_listing.ItemListing.__init__( self, max_size=max_size)
 
     # Overridden.
     def remove_item_by_index(self, index, quantity=1):
@@ -39,10 +36,7 @@ class Inventory(item_listing.ItemListing):
 
                 if item_obj.is_stackable():
                     if new_quantity > 0:
-                        self._item_listing_data[index] = (
-                            item_id,
-                            new_quantity,
-                        )
+                        self._item_listing_data[index] = (item_id, new_quantity)
                     else:
                         self._item_listing_data.pop(index)
                 else:
@@ -70,7 +64,6 @@ class Inventory(item_listing.ItemListing):
     # Overridden.
     def get_item_quantity(self, item_id):
         quantity = 0
-
         item_obj = items.Item.get_item(item_id)
 
         if item_obj:

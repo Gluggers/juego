@@ -254,60 +254,27 @@ class Entity(interactive_obj.InteractiveObject):
     # specified, the method will use bottom_left_pixel as an override.
     # top_left_pixel and bottom_left_pixel are tuples of pixel coordinates.
     # DOES NOT update surface - caller will have to do that
-    def face_direction(
-            self,
-            surface,
-            direction,
-            bottom_left_pixel=None,
-            top_left_pixel=None,
-    ):
+    def face_direction(self, surface, direction: directions.CardinalDirection, bottom_left_pixel=None,
+                       top_left_pixel=None):
         if self and surface and (bottom_left_pixel or top_left_pixel):
-            sequence_id = image_ids.get_direction_sequence_id(direction)
-
-            if sequence_id is not None:
-                # change direction variable and blit
-                self.facing_direction = direction
-                self.curr_image_sequence_id = sequence_id
-                self.blit_onto_surface(
-                    surface,
-                    bottom_left_pixel=bottom_left_pixel,
-                    top_left_pixel=top_left_pixel,
-                    blit_time_ms=pygame.time.get_ticks(),
-                )
+            # change direction variable and blit
+            self.facing_direction = direction
+            self.curr_image_sequence_id = image_ids.get_direction_sequence_id(direction)
+            self.blit_onto_surface(surface, bottom_left_pixel=bottom_left_pixel, top_left_pixel=top_left_pixel,
+                                   blit_time_ms=pygame.time.get_ticks())
 
 
 class Character(Entity):
     # Maps character-related object IDs to Character overworld_obj.
     character_listing = {}
 
-    def __init__(
-            self,
-            entity_id,
-            name_info,
-            image_path_dict,
-            collision_width=1,
-            collision_height=1,
-            skill_levels=None,
-            gender=Gender.NEUTRAL,
-            race=Race.HUMAN,
-            examine_info=None,
-            interaction_id=interaction.InteractionID.DEFAULT,
-    ):
-
+    def __init__(self, entity_id, name_info, image_path_dict, collision_width=1, collision_height=1, skill_levels=None,
+                 gender=Gender.NEUTRAL, race=Race.HUMAN, examine_info=None,
+                 interaction_id=interaction.InteractionID.DEFAULT):
         # a Character is an Entity type of interactive object
-        Entity.__init__(
-            self,
-            entity_id,
-            name_info,
-            image_path_dict,
-            collision_width=collision_width,
-            collision_height=collision_height,
-            skill_levels=skill_levels,
-            gender=gender,
-            race=race,
-            examine_info=examine_info,
-            interaction_id=interaction_id,
-        )
+        Entity.__init__(self, entity_id, name_info, image_path_dict, collision_width=collision_width,
+                        collision_height=collision_height, skill_levels=skill_levels, gender=gender, race=race,
+                        examine_info=examine_info, interaction_id=interaction_id)
 
         # TODO Fill in rest
 

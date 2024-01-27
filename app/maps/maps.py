@@ -567,21 +567,18 @@ class Map:
                 if len(tile_subset_rect) != 4:
                     raise Exception('Invalid tile subset rect length: {}'.format(len(tile_subset_rect)))
                 area = pygame.Rect(
-                    self.top_left_position[0],
-                    self.top_left_position[1],
+                    tile_subset_rect[0] * tiles.TILE_SIZE,
+                    tile_subset_rect[1] * tiles.TILE_SIZE,
                     tile_subset_rect[2] * tiles.TILE_SIZE,
                     tile_subset_rect[3] * tiles.TILE_SIZE,
                 )
-            else:
-                area = pygame.Rect(
-                    # self.top_left_position[0],
-                    # self.top_left_position[1],
-                    0,
-                    0,
-                    self.width_in_px,
-                    self.height_in_px
+                dest = (
+                    self.top_left_position[0] + tile_subset_rect[0] * tiles.TILE_SIZE,
+                    self.top_left_position[1] + tile_subset_rect[1] * tiles.TILE_SIZE
                 )
-            surface.blit(self._rendered_map_image, area)
+                surface.blit(self._rendered_map_image, dest, area=area)
+            else:
+                surface.blit(self._rendered_map_image, self.top_left_position)
 
     # Blits spawned interactive overworld_obj starting at current
     # top left position of map
@@ -792,7 +789,7 @@ class Map:
         if not stripped:
             raise Exception('No map data provided in {}'.format(map_yaml_path))
         map_data = stripped[0]
-        if not map_data:
+        if not stripped[0]:
             raise Exception('No map data provided in {}'.format(map_yaml_path))
         logging.debug('Parsing map data from {}'.format(map_yaml_path))
 

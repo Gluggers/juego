@@ -26,12 +26,14 @@ class ImageSequenceID(Enum):
 # If the list contains in an index, then that represents
 # blitting the previous standing overworld image for the Protagonist.
 # An empty list means just use the previous standing overworld image.
-def get_direction_sequence_id(direction):
-    """Returns image sequence ID for the sprite for facing the specified
+def get_direction_sequence_id(direction: directions.CardinalDirection) -> ImageSequenceID:
+    """Returns ImageSequenceID for the sprite for facing the specified
     direction.
 
+    Throws an Exception if given an invalid CardinalDirection.
+
     Args:
-        direction: direction ID for which to retrieve the image sequence ID.
+        direction: directions.CardinalDirection for which to retrieve the ImageSequenceID.
     """
     if direction == directions.CardinalDirection.NORTH:
         return ImageSequenceID.FACE_NORTH
@@ -41,4 +43,5 @@ def get_direction_sequence_id(direction):
         return ImageSequenceID.FACE_SOUTH
     elif direction == directions.CardinalDirection.WEST:
         return ImageSequenceID.FACE_WEST
-    return None
+    else:
+        raise Exception('Invalid CardinalDirection: {}'.format(direction))

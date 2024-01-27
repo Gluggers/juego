@@ -490,7 +490,7 @@ class Interaction:
             )
         """
 
-        logging.info("Place fishign rod  interaction here.")
+        logging.info("Place fishing rod  interaction here.")
 
     @classmethod
     def fishing_net_interaction(

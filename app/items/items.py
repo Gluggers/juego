@@ -174,8 +174,10 @@ class Item(icon.ViewingIcon):
         logging.info("Building standard items.")
         try:
             for item_yaml in glob.glob(os.path.join(util.get_yaml_path(), 'items', 'standard', '*.yml')):
-                yaml_data = util.strip_yaml(item_yaml)[0]
-                for item_yaml_info in yaml_data:
+                stripped = util.strip_yaml(item_yaml)
+                if not stripped:
+                    raise Exception('Empty item yaml {} provided'.format(item_yaml))
+                for item_yaml_info in stripped[0]:
                     if not cls.standard_item_factory(item_yaml_info):
                         raise Exception('Failed to build items from yaml file {}'.format(item_yaml))
         except Exception as e:

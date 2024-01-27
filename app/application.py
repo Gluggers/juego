@@ -725,7 +725,7 @@ class Application(object):
         save_data[save_game.MAP_ID] = self.curr_map.map_id
         save_data[save_game.PROTAG_LOCATION] = list(self.get_protagonist_tile_position())
         save_data[save_game.GAME_LANGUAGE] = language.Language.get_current_language().value
-        save_data[save_game.PROTAG_IMAGE_SEQUENCE_ID] = self.protagonist.curr_image_sequence
+        save_data[save_game.PROTAG_IMAGE_SEQUENCE_ID] = self.protagonist.curr_image_sequence_id
 
         save_data[save_game.PROTAG_INVENTORY] = self.protagonist.inventory.get_listing_dict()
 
@@ -777,7 +777,7 @@ class Application(object):
 
         if save_data:
             # Protagonist will face the correct direction.
-            self.protagonist.curr_image_sequence = save_data.get(
+            self.protagonist.curr_image_sequence_id = save_data.get(
                 save_game.PROTAG_IMAGE_SEQUENCE_ID,
                 image_ids.ImageSequenceID.FACE_SOUTH
             )

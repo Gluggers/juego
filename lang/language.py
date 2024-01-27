@@ -7,17 +7,17 @@ class LanguageEnum(Enum):
 
 
 class Language:
-    DEFAULT_LANGUAGE = LanguageEnum.ES
-    current_language = DEFAULT_LANGUAGE
+    DEFAULT_LANGUAGE: LanguageEnum = LanguageEnum.ES
+    _current_language: LanguageEnum = DEFAULT_LANGUAGE
 
     @classmethod
     def set_current_language(cls, new_language: LanguageEnum):
         if new_language in list(LanguageEnum):
-            cls.current_language = new_language
+            cls._current_language = new_language
 
     @classmethod
     def get_current_language(cls) -> LanguageEnum:
-        return cls.current_language
+        return cls._current_language
 
     @staticmethod
     def get_language_enum_from_str(lang_val: str) -> LanguageEnum:

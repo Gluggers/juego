@@ -934,10 +934,7 @@ class BaseView:
                                 if user_input_str:
                                     user_input_str = user_input_str[:-1]
                             else:
-                                entered_char = util.get_pygame_key_str(
-                                    events.key,
-                                    shift_on=False,
-                                )
+                                entered_char = util.get_pygame_key_str(events.key, shift_on=False)
 
                                 if entered_char and len(user_input_str) < MAX_INPUT_STR_LEN:
                                     given_input = True
@@ -1036,10 +1033,7 @@ class BaseView:
 
         if self._main_display_surface and menu_display and option_id_list:
             # Get list of menu pages.
-            menu_pages = menu_display.get_menu_page_list(
-                option_id_list,
-                font_color=font_color,
-            )
+            menu_pages = menu_display.get_menu_page_list(option_id_list, font_color=font_color)
 
         if menu_pages:
             # Start at top of menu.
@@ -1073,10 +1067,7 @@ class BaseView:
                 # Wait a bit before allowing user to select options.
                 if load_delay_ms:
                     # Get number of ticks to wait.
-                    num_ticks, leftover_ms = divmod(
-                        load_delay_ms,
-                        timekeeper.MS_PER_TICK,
-                    )
+                    num_ticks, leftover_ms = divmod(load_delay_ms, timekeeper.MS_PER_TICK)
 
                     if num_ticks:
                         for i in range(num_ticks):
@@ -1104,7 +1095,6 @@ class BaseView:
                             vertical_orientation=vertical_orientation,
                             alternative_top_left=alternative_top_left,
                         )
-
                         pygame.display.update()
 
                 if refresh_during:
@@ -1174,17 +1164,13 @@ class BaseView:
                                 prev_option = False
                                 next_option = False
 
-                                logging.info(
-                                    "Leaving menu without selecting option."
-                                )
+                                logging.info("Leaving menu without selecting option.")
                             elif events.key in ViewingKeys.MENU_OPTION_SELECT_KEYS:
                                 # We selected the current option.
                                 selected = True
                                 prev_option = False
                                 next_option = False
-                                curr_option_id = curr_page.get_option_id(
-                                    curr_selected_index
-                                )
+                                curr_option_id = curr_page.get_option_id(curr_selected_index)
 
                                 logging.info(
                                     "Selecting option %s",
@@ -1671,9 +1657,7 @@ class OverworldView(BaseView):
         # Set current map's top left position on display screen.
         if self._curr_map and protag_tile_location:
             # Calculate map top left position based on protagonist location.
-            self._curr_map.top_left_position = OverworldView.get_centered_map_top_left_pixel(
-                protag_tile_location
-            )
+            self._curr_map.top_left_position = OverworldView.get_centered_map_top_left_pixel(protag_tile_location)
 
             # Refresh and blit viewing.
             self.refresh_and_blit_self()
@@ -2113,7 +2097,8 @@ class OverworldView(BaseView):
             if map_right_edge > Measurements.MAIN_DISPLAY_WIDTH:
                 # map right edge is past the main display right edge
                 end_tile_x = min(
-                    map_object.width_in_tiles - 1 - int((map_right_edge - Measurements.MAIN_DISPLAY_WIDTH) / tiles.TILE_SIZE)
+                    map_object.width_in_tiles - 1 -
+                    int((map_right_edge - Measurements.MAIN_DISPLAY_WIDTH) / tiles.TILE_SIZE)
                     + Measurements.VIEWING_TILE_PADDING,
                     map_object.width_in_tiles - 1
                 )
@@ -2123,7 +2108,8 @@ class OverworldView(BaseView):
             if map_bottom_edge > Measurements.MAIN_DISPLAY_HEIGHT:
                 # map bottom edge is past the main display bottom edge
                 end_tile_y = min(
-                    map_object.height_in_tiles - 1 - int((map_bottom_edge - Measurements.MAIN_DISPLAY_HEIGHT) / tiles.TILE_SIZE)
+                    map_object.height_in_tiles - 1 -
+                    int((map_bottom_edge - Measurements.MAIN_DISPLAY_HEIGHT) / tiles.TILE_SIZE)
                     + Measurements.VIEWING_TILE_PADDING,
                     map_object.height_in_tiles - 1
                 )
@@ -2140,12 +2126,7 @@ class OverworldView(BaseView):
         return ret_rect
 
     @classmethod
-    def create_overworld_viewing(
-            cls,
-            main_display_surface,
-            protagonist=None,
-            curr_map=None,
-    ):
+    def create_overworld_viewing(cls, main_display_surface, protagonist=None, curr_map=None):
         """Factory method for an OverworldView object.
 
         Use this method instead of the OverworldView init method.
@@ -2168,15 +2149,9 @@ class OverworldView(BaseView):
         """
 
         ret_viewing = None
-
         if main_display_surface:
-            ret_viewing = OverworldView(
-                main_display_surface,
-                protagonist=protagonist,
-                curr_map=curr_map,
-            )
+            ret_viewing = OverworldView(main_display_surface, protagonist=protagonist, curr_map=curr_map)
 
             # Create displays for viewing.
             ret_viewing.create_displays()
-
         return ret_viewing
